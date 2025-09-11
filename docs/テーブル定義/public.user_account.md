@@ -10,7 +10,7 @@
 | 物理テーブル名                 | user_account                                                                                         |
 | 論理テーブル名                 |                                                                                                      |
 | 作成者                         | yoshi                                                                                                |
-| 作成日                         | 2025/07/26                                                                                           |
+| 作成日                         | 2025/09/06                                                                                           |
 | RDBMS                          | PostgreSQL 17.5 on x86_64-windows, compiled by msvc-19.44.35209, 64-bit 17.5                         |
 
 
@@ -23,6 +23,7 @@
 |   2 |                                | username                       | character varying(100)         | Yes      |                      |                                |
 |   3 |                                | email                          | character varying(255)         | Yes      |                      |                                |
 |   4 |                                | password                       | character varying(255)         | Yes      |                      |                                |
+|   5 |                                | admin_flag                     | boolean                        | Yes      | false                |                                |
 
 
 
@@ -44,9 +45,10 @@
 |   2 | 2200_16412_2_not_null          | CHECK                          | username IS NOT NULL           |
 |   3 | 2200_16412_3_not_null          | CHECK                          | email IS NOT NULL              |
 |   4 | 2200_16412_4_not_null          | CHECK                          | password IS NOT NULL           |
-|   5 | user_account_pkey              | PRIMARY KEY                    | id                             |
-|   6 | user_account_email_key         | UNIQUE                         | email                          |
-|   7 | user_account_username_key      | UNIQUE                         | username                       |
+|   5 | 2200_16412_5_not_null          | CHECK                          | admin_flag IS NOT NULL         |
+|   6 | user_account_pkey              | PRIMARY KEY                    | id                             |
+|   7 | user_account_email_key         | UNIQUE                         | email                          |
+|   8 | user_account_username_key      | UNIQUE                         | username                       |
 
 
 
