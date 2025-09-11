@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理者ログイン</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- 任意のCSS -->
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <h2>管理者ログイン</h2>
+
+    <form th:action="@{/admin/login}" th:object="${adminLoginForm}" method="post">
+        <div>
+            <label for="username">ユーザーID:</label>
+            <input type="text" id="username" th:field="*{username}" />
+            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></div>
+        </div>
+
+        <div>
+            <label for="password">パスワード:</label>
+            <input type="password" id="password" th:field="*{password}" />
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
+        </div>
+
+        <div th:if="${error}" class="error">
+            <p th:text="${error}"></p>
+        </div>
+
+        <button type="submit">ログイン</button>
+    </form>
+</body>
+</html>
