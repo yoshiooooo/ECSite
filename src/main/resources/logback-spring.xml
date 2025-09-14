@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <appender name="APPLOG" class="ch.qos.logback.core.FileAppender">
+    <file>logs/apllog.log</file>
+    <encoder>
+      <pattern>%d %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="com.example" level="INFO" additivity="false">
+    <appender-ref ref="APPLOG" />
+  </logger>
+
+  <root level="INFO">
+    <appender-ref ref="APPLOG" />
+  </root>
+
+</configuration>

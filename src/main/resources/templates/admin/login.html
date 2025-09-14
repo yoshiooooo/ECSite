@@ -2,28 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>管理者ログイン</title>
-    <link rel="stylesheet" href="/css/style.css"> <!-- 任意のCSS -->
+    <title>ログイン</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-    <div th:replace="fragments/header :: header"></div>
-    <h2>管理者ログイン</h2>
+    <h1>管理者ログイン</h1>
 
-    <form th:action="@{/admin/login}" th:object="${adminLoginForm}" method="post">
+    <div th:if="${error != null}">
+        <p style="color: red;" th:text="${error}">エラーがあります</p>
+    </div>
+
+    <form th:action="@{/login}" method="post" th:object="${adminLoginForm}">
+        <input type="hidden"
+               th:if="${_csrf != null}"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}" />
+
         <div>
             <label for="username">ユーザーID:</label>
-            <input type="text" id="username" th:field="*{username}" />
-            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></div>
+            <input type="text" id="username" name="username"
+                   th:value="${adminLoginForm?.username}" />
         </div>
 
         <div>
             <label for="password">パスワード:</label>
-            <input type="password" id="password" th:field="*{password}" />
-            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
-        </div>
-
-        <div th:if="${error}" class="error">
-            <p th:text="${error}"></p>
+            <input type="password" id="password" name="password"
+                   th:value="${adminLoginForm?.password}" />
         </div>
 
         <button type="submit">ログイン</button>

@@ -18,6 +18,12 @@ public class AdminAuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // SpringSecurityを使用しない用
+    // @Autowired
+    // public AdminAuthService(AdminUserRepository adminUserRepository) {
+    //     this.adminUserRepository = adminUserRepository;
+    // }
+
     public boolean authenticate(String username, String rawPassword) {
         return adminUserRepository.findByUsername(username)
             .filter(UserAccount::isAdminFlag) // 管理者かどうか

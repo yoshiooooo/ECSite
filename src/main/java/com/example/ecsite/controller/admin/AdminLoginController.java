@@ -1,8 +1,14 @@
 package com.example.ecsite.controller.admin;
 
 import com.example.ecsite.service.admin.AdminAuthService;
+
+import java.util.List;
+
 import com.example.ecsite.dto.request.admin.AdminLoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +39,15 @@ public class AdminLoginController {
             return "admin/login";
         }
 
-        // 認証成功時の処理（セッション格納など）
+        UsernamePasswordAuthenticationToken authToken =
+            new UsernamePasswordAuthenticationToken(
+            form.getUsername(),
+            null,
+            List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))
+        );
+
+        //認証成功時の処理（セッション格納など）
+        SecurityContextHolder.getContext().setAuthentication(authToken);
         return "redirect:/admin/dashboard";
     }
 }
